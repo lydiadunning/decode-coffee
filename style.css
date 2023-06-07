@@ -13,7 +13,10 @@ font-family: 'Frank Ruhl Libre', serif;
 :root {
   font-size: 16px;
   font-family: 'Frank Ruhl Libre', serif;
-  
+}
+
+html {
+  overflow-x: hidden;
 }
 
 *, *:after, *:before {
@@ -86,10 +89,6 @@ h3 {
   width: 45%;
 }
 
-.info {
-  /* bottom: 2rem; */
-}
-
 .hours {
   border-top: 5px solid black;
   position: absolute;
@@ -137,34 +136,22 @@ main {
 
 .secret {
   position: absolute;
-  right: 0;
+  right: 5px;
   top: 0;
 }
 
-/* .menu {
-  margin-top: 25%;
-}
-
-.location, .events {
-  margin-top: 60%;
-} */
-
 .pane {
   background: linear-gradient(to bottom right, hsla(0, 100%, 60%, 0.6), hsla(0, 100%, 50%, 0.7));
-  /* background-color: hsla(0, 100%, 50%, 0.7); */
   color: transparent;
   border-top: 10px solid hsla(0, 100%, 100%, .9);
   border-left: 10px solid hsla(0, 100%, 90%, .9);
   border-bottom: 10px solid hsla(0, 100%, 30%, 0.9);
-  border-right: 5px solid black;
-  /* border: 10px solid black; */
-  /* border-right-width: 5px; */
   border-top-left-radius: 2rem;
   border-bottom-left-radius: 2rem;
   overflow: hidden;
   width: 73vw;
-  transform: translate(73vw);
-  transition:  3s ease-in-out;
+  transform: translate(calc(73vw +  5px));
+  transition: 3s ease-in-out;
   height: 44vw;
   margin-top: 8%;
 }
@@ -199,29 +186,3 @@ main {
     color: transparent;
   }
 }
-
-/* .pane:target {
-  width: 73vw;
-} */
-
-
-
-
-
-/* 
- animation: 3s ease-in-out infinite reverse both running slidein;
-  easing-function: ease-in-out;
-
-    transition: all .5s ease-in-out;
-  line-height: 0;
-  padding: 0 1em;
-  color: transparent;
-}
- 
-.expandable:target {
-  line-height: 1.5;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  color: black;
-}
-*/
