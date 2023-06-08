@@ -16,13 +16,13 @@ window.onload = (e) => {
   const images = document.querySelector('.images')
   const panes = document.querySelectorAll(".pane")
 
-  panes.forEach(pane => {
-    pane.addEventListener('transitionend', fadeIn)
-  })
+  // panes.forEach(pane => {
+  //   pane.addEventListener('transitionend', fadeIn)
+  // })
  
   const options = {
     root: null,
-    rootMargin: '33%',
+    rootMargin: '33% 0% 33% 0%',
     threshold: 1
   };
 
@@ -34,7 +34,7 @@ window.onload = (e) => {
     }
   }
   
-  const observer = new IntersectionObserver((entries, observer) => {
+  const imageObserver = new IntersectionObserver((entries, imageObserver) => {
     entries.forEach(entry => {
       console.log(entry.target)
       if (!entry.isIntersecting) {
@@ -44,7 +44,8 @@ window.onload = (e) => {
           const pane = document.getElementById(entry.target.classList[0])
           console.log(pane)
           if (pane) {
-            toggle(pane, 'show', toggle, pane, 'opaque')
+            // toggle(pane, 'show', toggle, pane, 'opaque')
+            pane.classList.toggle('show')
           }
           // pane.classList.toggle('show')
           // pane.classList.toggle('opaque')
@@ -55,27 +56,28 @@ window.onload = (e) => {
     })
   }, options)
 
-
-  let callback = (entries, observer) => {
-    entries.forEach((entry) => {
-      console.log(entry)
-      // Each entry describes an intersection change for one observed
-      // target element:
-      //   entry.boundingClientRect
-      //   entry.intersectionRatio
-      //   entry.intersectionRect
-      //   entry.isIntersecting
-      //   entry.rootBounds
-      //   entry.target
-      //   entry.time
-    });
-  };
-
+  const paneObserver = new IntersectionObserver((entries, paneObserver) => {
+    entries.forEach(entry => {
+      console.log('paneObserver entries', entries)
+      if (!entry.isIntersecting) {
+        return
+      } else {
+        console.log('pane intersecting', entry.target)
+        entry.target.classList.toggle('opaque')
+      }
+    })
+  }, 
+  {
+    root: null,
+    threshold: 1,
+    rootMargin: '0px'
+  })
 
   for (const image of images.children) {
-    observer.observe(image)
+    imageObserver.observe(image)
   }
- 
+
+  panes.forEach(pane => paneObserver.observe(pane))
 
  /*
   const panes = document.querySelectorAll(".pane")
