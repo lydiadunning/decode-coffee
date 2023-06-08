@@ -12,11 +12,74 @@ const fadeIn = (e) => {
 
 window.onload = (e) => {
   console.log('window fully loaded')
+
+  const images = document.querySelector('.images')
+  const panes = document.querySelectorAll(".pane")
+
+  panes.forEach(pane => {
+    pane.addEventListener('transitionend', fadeIn)
+  })
+ 
+  const options = {
+    root: null,
+    rootMargin: '33%',
+    threshold: 1
+  };
+
+  const toggle = (element, className, callback = false, ...callbackArgs) => {
+    console.log(element)
+    element.classList.toggle(className)
+    if (callback) {
+      callback(...callbackArgs)
+    }
+  }
+  
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      console.log(entry.target)
+      if (!entry.isIntersecting) {
+        return
+      } else {
+        if (entry.target.classList) {
+          const pane = document.getElementById(entry.target.classList[0])
+          console.log(pane)
+          if (pane) {
+            toggle(pane, 'show', toggle, pane, 'opaque')
+          }
+          // pane.classList.toggle('show')
+          // pane.classList.toggle('opaque')
+        }
+      // entry.target.classList.toggle('show')
+      // entry.target.classList.toggle('opaque')
+      }
+    })
+  }, options)
+
+
+  let callback = (entries, observer) => {
+    entries.forEach((entry) => {
+      console.log(entry)
+      // Each entry describes an intersection change for one observed
+      // target element:
+      //   entry.boundingClientRect
+      //   entry.intersectionRatio
+      //   entry.intersectionRect
+      //   entry.isIntersecting
+      //   entry.rootBounds
+      //   entry.target
+      //   entry.time
+    });
+  };
+
+
+  for (const image of images.children) {
+    observer.observe(image)
+  }
+ 
+
+ /*
   const panes = document.querySelectorAll(".pane")
   panes.forEach(pane => {
-    console.log(pane)
-    // pane.addEventListener('keydown', openPane)
-    // pane.classList.toggle('show')
     pane.addEventListener('transitionend', fadeIn)
   })
   const images = document.querySelector('.images')
@@ -59,6 +122,7 @@ window.onload = (e) => {
     console.log(window.scrollY)
     scrollTriggers.forEach(trigger => trigger.checkRange(window.scrollY))
   })
+  */
 }
 
 /**
@@ -80,3 +144,4 @@ window.onload = (e) => {
  *                                                 y + 2/3 screen height
  * 
  */
+
