@@ -111,7 +111,7 @@ p {
 }
 
 main {
-  position: absolute;
+  position: relative;
 }
 
 .about {
@@ -178,11 +178,14 @@ main {
 
 .opaque {
   color: black;
-  animation: fade-in 1s ease-in;
+  animation: fade-in 5s ease-in;
 }
 
 @keyframes fade-in {
   0% {
+    color: transparent;
+  }
+  50% {
     color: transparent;
   }
   100% {
@@ -192,6 +195,9 @@ main {
 
 @keyframes fade-out {
   0% {
+    color: black;
+  }
+  50% {
     color: black;
   }
   100% {
