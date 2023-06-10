@@ -3,9 +3,15 @@ window.onload = (e) => {
 
   const options = {
     root: null,
-    rootMargin: '-10% 0% -33% 0%',
+    rootMargin: '10% 0% -33% 0%',
     threshold: 1
   };
+
+  /**
+   * The values in rootMargin define offsets added to each side of the 
+   * intersection root's bounding box to create the final intersection 
+   * root bounds
+   */
   
   const imageObserver = new IntersectionObserver((entries, imageObserver) => {
     entries.forEach(entry => {
